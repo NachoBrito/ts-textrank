@@ -17,5 +17,10 @@
     "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@types/stopword": "^1.0.2",
+    "stopword": "^1.0.11",
+    "transliteration": "^2.2.0"
   }
 }
