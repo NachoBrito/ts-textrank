@@ -7,6 +7,8 @@
   "author": "Nacho Brito",
   "license": "MIT",
   "scripts": {
+    "tsc-watch": "tsc -w",
+    "tsc": "tsc",
     "test": "jest --coverage"
   },
   "devDependencies": {
