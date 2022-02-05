@@ -5,5 +5,15 @@
   "main": "index.js",
   "repository": "https://github.com/NachoBrito/ts-textrank",
   "author": "Nacho Brito",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "jest": "^27.4.7",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  }
 }
