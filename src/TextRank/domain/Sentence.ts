@@ -8,7 +8,7 @@ export default class Sentence {
     }
 
     getNormialized(): string {
-        const asciis = this.words.map(w => w.normalized);
-        return asciis.join(" ");
+        const normalizedWords = this.words.map(w => w.normalized);
+        return normalizedWords.join(" ");
     }
 }
