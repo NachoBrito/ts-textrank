@@ -3,7 +3,7 @@ import Word from '../../../../src/TextRank/domain/Word';
 import Text from '../../../../src/TextRank/domain/Text';
 import DefaultTextParser from '../../../../src/TextRank/domain/DefaultTextParser';
 
-describe('Sentence creation', () => {
+describe('Text parsing', () => {
     it('should create a single Sentence from a one-line text', () => {
         const text = "Hola, buenos días ¿Cómo estás esta mañana?";
         const expectedSentences = [new Sentence(text, [
@@ -34,7 +34,7 @@ describe('Sentence creation', () => {
         `
         
         const actual = new DefaultTextParser().parse(text, 'en');
-        console.log(`${JSON.stringify(actual)}`);
+        //console.log(`${JSON.stringify(actual)}`);
 
         expect(actual.sentences).toHaveLength(7);
     });    
