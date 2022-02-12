@@ -15,6 +15,7 @@ class Graph {
         const sentences = this.text.sentences;
         const total = sentences.length;
         for (let i = 0; i < total; i++) {
+            result[i] = [];
             for (let j = 0; j < total; j++) {
                 if (i === j) {
                     result[i][j] = 1;

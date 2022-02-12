@@ -22,6 +22,7 @@ export default class Graph {
         const total = sentences.length;
         for(let i = 0; i < total; i++)
         {
+            result[i] = []
             for(let j=0;j<total;j++)
             {
                 if(i === j)

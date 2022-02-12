@@ -5,7 +5,7 @@ import DefaultTextParser from '../../../../src/TextRank/domain/DefaultTextParser
 
 describe('Text parsing', () => {
     it('should create a single Sentence from a one-line text', () => {
-        const text = "Hola, buenos días ¿Cómo estás esta mañana?";
+        const text = "Hola, buenos días Cómo estás esta mañana?";
         const expectedSentences = [new Sentence(text, [
             new Word("Hola"), 
             new Word("buenos"), 
@@ -14,7 +14,7 @@ describe('Text parsing', () => {
             new Word("estás"),
             new Word("esta"),
             new Word("mañana")
-        ])];
+        ],1)];
         const expectedText = new Text(text, expectedSentences);
         const actual = new DefaultTextParser().parse(text, 'es');
         //console.log(`${text} => ${actual.getNormialized()}`);

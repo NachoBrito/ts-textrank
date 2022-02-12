@@ -12,12 +12,15 @@ export default class DefaultTextParser implements TextParser {
      * @param sentence 
      */
     parse(text: string, language: string): Text {
-        const rx = /[^\.!\?]+[\.!\?]+/g
+        //separators: o, !, ¡, ¿, ?
+        const rx = /[^\.¡!\?¿]+[\.¡!\?¿]+/g
         let result, rawSentence, limiter;
         const sentences: Sentence[] = [];
+        let position = 1
         while ((result = rx.exec(text)) !== null) {
             rawSentence = result[0].trim();            
-            sentences.push(this.buildSentence(rawSentence, language));
+            sentences.push(this.buildSentence(rawSentence, language, position));
+            position++
         }
         return new Text(text, sentences);
     }
@@ -29,12 +32,12 @@ export default class DefaultTextParser implements TextParser {
      * @param language 
      * @returns the sentence model
      */
-    private buildSentence(raw: string, language: string): Sentence {
+    private buildSentence(raw: string, language: string, position:number): Sentence {
         const tokens = this.tokenize(raw);
         const words: Word[] = tokens.map(t => new Word(t));
         const filtered = this.filter(words, language);
 
-        return new Sentence(raw, filtered);
+        return new Sentence(raw, filtered, position);
     }
 
     /**
@@ -64,6 +67,8 @@ export default class DefaultTextParser implements TextParser {
                 .replace(/[^\p{L}\s]/gu, "")
                 //collapse multiple spaces
                 .replace(/\s+/g, " ")
+                //remove trailing spaces
+                .trim()
                 //split by space
                 .split(" ");
         return parts;

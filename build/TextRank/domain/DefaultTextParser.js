@@ -13,12 +13,15 @@ class DefaultTextParser {
      * @param sentence
      */
     parse(text, language) {
-        const rx = /[^\.!\?]+[\.!\?]+/g;
+        //separators: o, !, ¡, ¿, ?
+        const rx = /[^\.¡!\?¿]+[\.¡!\?¿]+/g;
         let result, rawSentence, limiter;
         const sentences = [];
+        let position = 1;
         while ((result = rx.exec(text)) !== null) {
             rawSentence = result[0].trim();
-            sentences.push(this.buildSentence(rawSentence, language));
+            sentences.push(this.buildSentence(rawSentence, language, position));
+            position++;
         }
         return new Text_1.default(text, sentences);
     }
@@ -29,11 +32,11 @@ class DefaultTextParser {
      * @param language
      * @returns the sentence model
      */
-    buildSentence(raw, language) {
+    buildSentence(raw, language, position) {
         const tokens = this.tokenize(raw);
         const words = tokens.map(t => new Word_1.default(t));
         const filtered = this.filter(words, language);
-        return new Sentence_1.default(raw, filtered);
+        return new Sentence_1.default(raw, filtered, position);
     }
     /**
      * removes stopwords
@@ -59,6 +62,8 @@ class DefaultTextParser {
             .replace(/[^\p{L}\s]/gu, "")
             //collapse multiple spaces
             .replace(/\s+/g, " ")
+            //remove trailing spaces
+            .trim()
             //split by space
             .split(" ");
         return parts;
