@@ -70,7 +70,7 @@ export default class Summarizer {
             //sort winners by position
             sentences.sort((s1: Sentence, s2: Sentence) => s1.position - s2.position)
         }
-        
+
         return sentences.map((s: Sentence) => s.raw)
     }
 
@@ -92,7 +92,7 @@ export default class Summarizer {
             w = this.graph.weights[i][j]
             S = this.text.sentences[j].score
 
-            W = this.graph.weights[j].reduce((a, b) => a + b, 0)
+            W = this.graph.weightSums[j]
 
             sum += S * w / W
         }
