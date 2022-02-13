@@ -5,7 +5,7 @@ export default class Sentence {
     readonly words: Word[];
     readonly position: number
 
-    relevance:number = 0
+    score:number = 1
 
     constructor(raw:string, words: Word[], position:number) {
         this.words = words;

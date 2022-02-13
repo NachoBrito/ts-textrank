@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Sentence {
     constructor(raw, words, position) {
-        this.relevance = 0;
+        this.score = 1;
         this.words = words;
         this.raw = raw;
         this.position = position;
