@@ -53,7 +53,7 @@ export default class Summarizer {
             .text
             .sentences
             .sort((s1: Sentence, s2: Sentence) => s1.score - s2.score)
-            .slice(0,this.config.getSentenceCount())
+            .slice(0, this.config.getSentenceCount())
 
         //sort winners by position and return strings
         sentences.sort((s1: Sentence, s2: Sentence) => s1.position - s2.position)
