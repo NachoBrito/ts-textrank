@@ -13,6 +13,8 @@ logs
 results
 tmp
 
+src/test.ts
+
 # Build
 public/css/main.css
 
@@ -35,7 +37,7 @@ bower_components
 Thumbs.db
 
 # Ignore built ts files
-build
+dist
 
 # ignore yarn.lock
 yarn.lock
