@@ -1,7 +1,7 @@
 import DefaultTextParser from "../../../../src/TextRank/domain/DefaultTextParser"
 import SorensenDiceSimilarity from "../../../../src/TextRank/domain/SorensenDiceSimilarity"
-import Summarizer from "../../../../src/TextRank/domain/Summarizer";
-import { AbsoluteSummarizerConfig, RelativeSummarizerConfig } from "../../../../src/TextRank/domain/SummarizerConfig"
+import Summarizer from "../../../../src/TextRank/application/Summarizer";
+import { AbsoluteSummarizerConfig, RelativeSummarizerConfig } from "../../../../src/TextRank/application/SummarizerConfig"
 import Text from "../../../../src/TextRank/domain/Text";
 
 describe("Summarizer config", () => {

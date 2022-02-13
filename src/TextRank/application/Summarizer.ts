@@ -1,8 +1,9 @@
-import LoggerInterface from "../infraestructure/LoggerInterface";
-import Graph from "./Graph";
-import Sentence from "./Sentence";
-import { SummarizerConfig } from "./SummarizerConfig";
-import Text from "./Text";
+import Text from "../domain/Text"
+import Graph from "../domain/Graph"
+import Sentence from "../domain/Sentence"
+import LoggerInterface from "../infraestructure/LoggerInterface"
+import { SummarizerConfig } from "./SummarizerConfig"
+
 
 export default class Summarizer {
     static SORT_SCORE = 1

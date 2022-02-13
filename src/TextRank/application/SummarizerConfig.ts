@@ -1,7 +1,8 @@
-import SentenceSimilarity from "./SentenceSimilarity";
-import Summarizer from "./Summarizer";
-import Text from "./Text";
-import TextParser from "./TextParser";
+import SentenceSimilarity from "../domain/SentenceSimilarity"
+import TextParser from "../domain/TextParser"
+import Text from "../domain/Text"
+import Summarizer from "./Summarizer"
+
 
 export interface SummarizerConfig {
     getSimilarityFunction(): SentenceSimilarity

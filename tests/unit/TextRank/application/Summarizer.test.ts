@@ -1,5 +1,5 @@
-import Summarizer from "../../../../src/TextRank/domain/Summarizer";
-import {AbsoluteSummarizerConfig} from "../../../../src/TextRank/domain/SummarizerConfig";
+import Summarizer from "../../../../src/TextRank/application/Summarizer";
+import {AbsoluteSummarizerConfig} from "../../../../src/TextRank/application/SummarizerConfig";
 import SorensenDiceSimilarity from '../../../../src/TextRank/domain/SorensenDiceSimilarity';
 import DefaultTextParser from '../../../../src/TextRank/domain/DefaultTextParser';
 import NullLogger from '../../../../src/TextRank/infraestructure/NullLogger';
