@@ -5,10 +5,15 @@ import { SummarizerConfig } from "./SummarizerConfig";
 import Text from "./Text";
 
 export default class Summarizer {
+    static SORT_SCORE = 1
+    static SORT_OCCURENCE = 2
+
     private logger: LoggerInterface
     private readonly config: SummarizerConfig
     private graph: Graph | null = null
     private text: Text | null = null
+
+    debug: boolean = false
 
     private threshold = .0001
     private maxLoops = 50
@@ -25,7 +30,7 @@ export default class Summarizer {
         const sentenceCount = this.text.sentences.length
         let error
         for (let i = 0; i < this.maxLoops; i++) {
-            this.logger.debug("Starting iteration %d", i)
+            //this.logger.debug("Starting iteration %d", i)
             for (let j = 0; j < sentenceCount; j++) {
 
                 error = this.calculateScore(j)
@@ -52,11 +57,20 @@ export default class Summarizer {
         let sentences = this
             .text
             .sentences
-            .sort((s1: Sentence, s2: Sentence) => s1.score - s2.score)
+            .sort((s1: Sentence, s2: Sentence) => s2.score - s1.score)
             .slice(0, this.config.getSentenceCount())
 
-        //sort winners by position and return strings
-        sentences.sort((s1: Sentence, s2: Sentence) => s1.position - s2.position)
+        if (this.debug) {
+            this.logger.debug("Summary generated with %d sentences:", sentences.length)
+            sentences.map((s: Sentence) => {
+                this.logger.debug("[%d] %s", s.score, s.raw)
+            })
+        }
+        if (this.config.getSortMode() === Summarizer.SORT_OCCURENCE) {
+            //sort winners by position
+            sentences.sort((s1: Sentence, s2: Sentence) => s1.position - s2.position)
+        }
+        
         return sentences.map((s: Sentence) => s.raw)
     }
 

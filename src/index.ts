@@ -18,8 +18,11 @@ const d = .85
 const sim = new SorensenDiceSimilarity()
 const parser = new DefaultTextParser()
 const logger = new ConsoleLogger()
-const config = new AbsoluteSummarizerConfig(5,sim,parser,d)
+const config = new AbsoluteSummarizerConfig(5,sim,parser,d, Summarizer.SORT_OCCURENCE)
 const summarizer = new Summarizer(config,logger)
-
+summarizer.debug = true
+const t0 = performance.now()
 const summary = summarizer.summarize(text, lang)
-logger.info("Summary generated:\n%s", summary)
+const t1 = performance.now()
+const t = t1 - t0
+logger.info("Summary generated in %d ms:\n%s", t ,summary)

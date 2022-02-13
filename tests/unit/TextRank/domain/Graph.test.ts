@@ -34,5 +34,8 @@ describe("Graph", () => {
         //symmetry
         expect(graph.weights[0][1]).toStrictEqual(graph.weights[1][0])
 
+        expect(graph.weightSums).toHaveLength(2)
+        expect(graph.weightSums[0]).toStrictEqual(graph.weights[0][0] + graph.weights[0][1])
+        expect(graph.weightSums[1]).toStrictEqual(graph.weights[1][0] + graph.weights[1][1])
     })
 })
