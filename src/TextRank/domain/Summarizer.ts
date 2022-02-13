@@ -58,7 +58,7 @@ export default class Summarizer {
             .text
             .sentences
             .sort((s1: Sentence, s2: Sentence) => s2.score - s1.score)
-            .slice(0, this.config.getSentenceCount())
+            .slice(0, this.config.getSentenceCount(this.text))
 
         if (this.debug) {
             this.logger.debug("Summary generated with %d sentences:", sentences.length)

@@ -1,17 +1,18 @@
 import SentenceSimilarity from "./SentenceSimilarity";
+import Summarizer from "./Summarizer";
 import Text from "./Text";
 import TextParser from "./TextParser";
 
 export interface SummarizerConfig {
     getSimilarityFunction(): SentenceSimilarity
 
-    getSentenceCount(): number
+    getSentenceCount(text: Text): number
 
     getTextParser(): TextParser
 
     getDampingFactor(): number
 
-    getSortMode():number
+    getSortMode(): number
 }
 
 /**
@@ -23,9 +24,9 @@ export class AbsoluteSummarizerConfig implements SummarizerConfig {
     private readonly similarity: SentenceSimilarity
     private readonly parser: TextParser
     private readonly dampingFactor: number
-    private readonly sortMode:number
+    private readonly sortMode: number
 
-    constructor(sentenceCount: number, similarity: SentenceSimilarity, parser: TextParser, dampingFactor: number, sortMode:number) {
+    constructor(sentenceCount: number, similarity: SentenceSimilarity, parser: TextParser, dampingFactor: number, sortMode: number) {
         this.sentenceCount = sentenceCount
         this.similarity = similarity
         this.parser = parser
@@ -37,14 +38,18 @@ export class AbsoluteSummarizerConfig implements SummarizerConfig {
     private validate() {
         if (this.sentenceCount < 1) {
             throw new Error(`sentence count ${this.sentenceCount} is not valid. Must be 0 < d`)
-        }        
+        }
         if (this.dampingFactor < 0 || this.dampingFactor > 1) {
             throw new Error(`damping factor ${this.dampingFactor} is not valid. Must be 0 < d < 1`)
         }
+        if (this.sortMode !== Summarizer.SORT_OCCURENCE && this.sortMode !== Summarizer.SORT_SCORE) {
+            throw new Error(`sort mode ${this.sortMode} is not valid. Must be Summarizer.SORT_OCCURENCE or Summarizer.SORT_SCORE`)
+        }
+
     }
     getSortMode(): number {
         return this.sortMode
-    }    
+    }
     getDampingFactor(): number {
         return this.dampingFactor
     }
@@ -54,20 +59,20 @@ export class AbsoluteSummarizerConfig implements SummarizerConfig {
     getSimilarityFunction(): SentenceSimilarity {
         return this.similarity
     }
-    getSentenceCount(): number {
+    getSentenceCount(text: Text): number {
         return this.sentenceCount
     }
 }
 
 export class RelativeSummarizerConfig implements SummarizerConfig {
-    private readonly sentenceCount: number
+    private readonly sentenceRatio: number
     private readonly similarity: SentenceSimilarity
     private readonly parser: TextParser
     private readonly dampingFactor: number
-    private readonly sortMode:number
+    private readonly sortMode: number
 
-    constructor(text: Text, sentenceRatio: number, similarity: SentenceSimilarity, parser: TextParser, dampingFactor: number, sortMode:number) {
-        this.sentenceCount = this.calculateSentenceCount(text, sentenceRatio)
+    constructor(sentenceRatio: number, similarity: SentenceSimilarity, parser: TextParser, dampingFactor: number, sortMode: number) {
+        this.sentenceRatio = sentenceRatio
         this.similarity = similarity
         this.parser = parser
         this.dampingFactor = dampingFactor
@@ -76,21 +81,26 @@ export class RelativeSummarizerConfig implements SummarizerConfig {
     }
 
     private validate() {
+        if (this.sentenceRatio <= 0 || this.sentenceRatio >= .5) {
+            throw new Error(`sentence ratio ${this.sentenceRatio} is not valid. Must be 0 < ratio < .5`)
+        }
         if (this.dampingFactor < 0 || this.dampingFactor > 1) {
             throw new Error(`damping factor ${this.dampingFactor} is not valid. Must be 0 < d < 1`)
         }
+        if (this.sortMode !== Summarizer.SORT_OCCURENCE && this.sortMode !== Summarizer.SORT_SCORE) {
+            throw new Error(`sort mode ${this.sortMode} is not valid. Must be Summarizer.SORT_OCCURENCE or Summarizer.SORT_SCORE`)
+        }
+
     }
 
     getSortMode(): number {
         return this.sortMode
-    } 
-        
-    private calculateSentenceCount(text: Text, sentenceRatio: number): number {
-        if (sentenceRatio <= 0 || sentenceRatio >= .5) {
-            throw new Error(`sentence ratio ${sentenceRatio} is not valid. Must be 0 < ratio < .5`)
-        }
+    }
+
+    private calculateSentenceCount(text: Text): number {
+
         const total = text.sentences.length
-        return total * sentenceRatio
+        return total * this.sentenceRatio
     }
     getTextParser(): TextParser {
         return this.parser
@@ -98,8 +108,8 @@ export class RelativeSummarizerConfig implements SummarizerConfig {
     getSimilarityFunction(): SentenceSimilarity {
         return this.similarity
     }
-    getSentenceCount(): number {
-        return this.sentenceCount
+    getSentenceCount(text: Text): number {
+        return this.calculateSentenceCount(text)
     }
     getDampingFactor(): number {
         return this.dampingFactor

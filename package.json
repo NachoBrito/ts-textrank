@@ -9,7 +9,7 @@
   "scripts": {
     "tsc-watch": "tsc -w",
     "tsc": "tsc",
-    "test": "jest --coverage"
+    "test": "jest --coverage --maxWorkers=50%"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
