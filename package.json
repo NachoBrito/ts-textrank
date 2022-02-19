@@ -1,12 +1,12 @@
 {
   "name": "ts-textrank",
-  "version": "0.1.1",
+  "version": "0.1.5",
   "description": "Typescript TextRank implementation",
-  "main": "dist/index.js",
+  "main": "index.js",
   "repository": "https://github.com/NachoBrito/ts-textrank",
   "author": "Nacho Brito",
   "license": "MIT",
-  "types": "dist/index.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "tsc-watch": "tsc -w",
     "tsc": "tsc",
