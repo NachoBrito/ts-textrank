@@ -1,6 +1,6 @@
 {
   "name": "ts-textrank",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Typescript TextRank implementation",
   "main": "index.js",
   "repository": "https://github.com/NachoBrito/ts-textrank",
