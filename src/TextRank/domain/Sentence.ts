@@ -5,7 +5,7 @@ export default class Sentence {
     readonly words: Word[];
     readonly position: number
 
-    score:number = 1
+    score:number = 0
 
     constructor(raw:string, words: Word[], position:number) {
         this.words = words;
@@ -17,4 +17,6 @@ export default class Sentence {
         const normalizedWords = this.words.map(w => w.normalized);
         return normalizedWords.join(" ");
     }
+
+    
 }

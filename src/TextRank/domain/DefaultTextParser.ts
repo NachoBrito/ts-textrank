@@ -12,17 +12,19 @@ export default class DefaultTextParser implements TextParser {
      * @param sentence 
      */
     parse(text: string, language: string): Text {
-        //separators: o, !, ¡, ¿, ?
-        const rx = /[^\.¡!\?¿]+[\.¡!\?¿]+/g
+        //separators: ., !, ¡, ¿, ?
+        const rx = /[^\.¡!\?¿\n]{2,}[\n\.¡!\?¿]+/g
         let result, rawSentence, limiter;
-        const sentences: Sentence[] = [];
+        const sentences:Record<string,Sentence> = {};
         let position = 1
+        let sent:Sentence
         while ((result = rx.exec(text)) !== null) {
-            rawSentence = result[0].trim();            
-            sentences.push(this.buildSentence(rawSentence, language, position));
+            rawSentence = result[0].trim(); 
+            sent = this.buildSentence(rawSentence, language, position)           
+            sentences[sent.getNormalized()] = sent;
             position++
         }
-        return new Text(text, sentences);
+        return new Text(text, Object.values(sentences));
     }
 
     /**
