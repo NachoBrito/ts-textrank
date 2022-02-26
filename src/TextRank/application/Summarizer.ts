@@ -64,7 +64,7 @@ export default class Summarizer {
         if (this.debug) {
             this.logger.debug("Summary generated with %d sentences:", sentences.length)
             sentences.map((s: Sentence) => {
-                this.logger.debug("[%d] %s", s.score, s.raw)
+                this.logger.debug("[%f] %s", s.score, s.raw)
             })
         }
         if (this.config.getSortMode() === Summarizer.SORT_OCCURENCE) {
