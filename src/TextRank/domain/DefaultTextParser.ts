@@ -20,6 +20,9 @@ export default class DefaultTextParser implements TextParser {
         let sent:Sentence
         while ((result = rx.exec(text)) !== null) {
             rawSentence = result[0].trim(); 
+            if(rawSentence === ''){
+                continue;
+            }
             sent = this.buildSentence(rawSentence, language, position)           
             sentences[sent.getNormalized()] = sent;
             position++
