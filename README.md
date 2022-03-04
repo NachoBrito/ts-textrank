@@ -44,12 +44,11 @@ const ratio = .25
 //Damping factor. See "How it works" for more info.
 const d = .85
 
-//How do you want summary sentences to be sorte?
+//How do you want summary sentences to be sorted?
 //Get sentences in the order that they appear in text:
 const sorting = Summarizer.SORT_OCCURENCE
-
-//Or, sort by relevance:
-//const sorting = Summarizer.static SORT_SCORE
+//Or sort them by relevance:
+//const sorting = Summarizer.SORT_SCORE
 const config = new RelativeSummarizerConfig(ratio, sim, parser, d, sorting)
 
 //Or, if you want a fixed number of sentences:
@@ -58,12 +57,12 @@ const config = new RelativeSummarizerConfig(ratio, sim, parser, d, sorting)
 
 const summarizer = new Summarizer(config, logger)
 
-//summary will be an array of sentences summarizing text
-const text = "...Text to summarize..."
-
-//See [fergiemcdowall/stopword](https://github.com/fergiemcdowall/stopword) for supported languages
+//Language is used for stopword removal.
+//See https://github.com/fergiemcdowall/stopword for supported languages
 const lang = "en"
 
+const text = "...Text to summarize..."
+//summary will be an array of sentences summarizing text
 const summary = summarizer.summarize(text, lang)
 ```    
 
