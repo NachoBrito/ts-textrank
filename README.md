@@ -67,3 +67,14 @@ const summary = summarizer.summarize(text, lang)
 ```    
 
 ## How it works
+
+TextRank algorithm was introduced by Rada Mihalcea and Paul Tarau in their paper "[TextRank: Bringing Order into Texts](https://aclanthology.org/W04-3252/)" in 2004. It applies the same principle that Google's PageRank used to discover relevant web pages.
+
+The idea is to split a text into sentences, and then calculate a score for each sentence in terms of its similarity to the other sentences. TextRank treats sentences having common words as a link between them (like hyperlinks between web pages). Then, it applies a weight to that link based on how many words the sentences have in common. ts-textrank uses [Sorensen-Dice Similarity](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient) for this.
+
+The sentences with the higher score will be those that share the most words to the rest, and can be used as a summary of the hole text.
+
+### Damping factor
+
+Original PageRank algorithm included a damping factor to represent the probability of a user clicking random links in a page. In this context the authors has kept it and fixed to a value of .85, but it can be modified if needed for better results in specific cases.
+
