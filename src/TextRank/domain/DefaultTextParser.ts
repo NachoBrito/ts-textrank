@@ -12,21 +12,24 @@ export default class DefaultTextParser implements TextParser {
      * @param sentence 
      */
     parse(text: string, language: string): Text {
-        //separators: ., !, ¡, ¿, ?
-        const rx = /[^\.¡!\?¿\n]{2,}[\n\.¡!\?¿]+/g
-        let result, rawSentence, limiter;
-        const sentences:Record<string,Sentence> = {};
+        const sentences: Record<string, Sentence> = {};
+        let sent: Sentence
+
+        //Strategy: split text by sentence boundaries:
+        //- a dot followed by anything but a wordy
+        //- \n,¡!¿? in any position
+        const rxSep = /\.[^\w]|[\n¡!\?¿]/g
+        const parts = text.split(rxSep)
         let position = 1
-        let sent:Sentence
-        while ((result = rx.exec(text)) !== null) {
-            rawSentence = result[0].trim(); 
-            if(rawSentence === ''){
-                continue;
+        parts.map(rawSentence => {
+            rawSentence = rawSentence.trim()
+            if(rawSentence === ""){
+                return;
             }
-            sent = this.buildSentence(rawSentence, language, position)           
+            sent = this.buildSentence(rawSentence, language, position)
             sentences[sent.getNormalized()] = sent;
             position++
-        }
+        })
         return new Text(text, Object.values(sentences));
     }
 
@@ -37,7 +40,7 @@ export default class DefaultTextParser implements TextParser {
      * @param language 
      * @returns the sentence model
      */
-    private buildSentence(raw: string, language: string, position:number): Sentence {
+    private buildSentence(raw: string, language: string, position: number): Sentence {
         const tokens = this.tokenize(raw);
         const words: Word[] = tokens.map(t => new Word(t));
         const filtered = this.filter(words, language);

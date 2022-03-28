@@ -6,7 +6,7 @@ import DefaultTextParser from '../../../../src/TextRank/domain/DefaultTextParser
 describe('Text parsing', () => {
     it('should create a single Sentence from a one-line text', () => {
         const text = "Hola, buenos días Cómo estás esta mañana?";
-        const expectedSentences = [new Sentence(text, [
+        const expectedSentences = [new Sentence("Hola, buenos días Cómo estás esta mañana", [
             new Word("Hola"), 
             new Word("buenos"), 
             new Word("días"),
@@ -22,7 +22,7 @@ describe('Text parsing', () => {
         expect(actual.raw).toStrictEqual(text);
         expect(actual.sentences).toHaveLength(1);
         expect(actual).toStrictEqual(expectedText);
-        expect(actual.sentences[0].raw).toStrictEqual(text);
+        expect(actual.sentences[0].raw).toStrictEqual("Hola, buenos días Cómo estás esta mañana");
         expect(actual.sentences[0].getNormalized()).toStrictEqual("hola buenos dias estas esta manana");
     });
 
