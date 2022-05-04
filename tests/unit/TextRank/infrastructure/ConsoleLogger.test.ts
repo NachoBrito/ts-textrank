@@ -1,4 +1,4 @@
-import ConsoleLogger from '../../../../src/TextRank/infraestructure/ConsoleLogger';
+import ConsoleLogger from '../../../../src/TextRank/infrastructure/ConsoleLogger';
 
 describe("Console logger", () => { 
     it("should call the right console function for each log level", () => { 

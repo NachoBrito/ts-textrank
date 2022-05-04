@@ -1,7 +1,7 @@
 import SentenceSimilarity from "../domain/SentenceSimilarity"
 import TextParser from "../domain/TextParser"
 import Text from "../domain/Text"
-import Summarizer from "./Summarizer"
+import { SORT_BY } from "./Summarizer"
 
 
 export interface SummarizerConfig {
@@ -43,8 +43,8 @@ export class AbsoluteSummarizerConfig implements SummarizerConfig {
         if (this.dampingFactor < 0 || this.dampingFactor > 1) {
             throw new Error(`damping factor ${this.dampingFactor} is not valid. Must be 0 < d < 1`)
         }
-        if (this.sortMode !== Summarizer.SORT_OCCURENCE && this.sortMode !== Summarizer.SORT_SCORE) {
-            throw new Error(`sort mode ${this.sortMode} is not valid. Must be Summarizer.SORT_OCCURENCE or Summarizer.SORT_SCORE`)
+        if (this.sortMode !== SORT_BY.OCCURRENCE && this.sortMode !== SORT_BY.SCORE) {
+            throw new Error(`sort mode ${this.sortMode} is not valid. Must be SORT_BY.OCCURRENCE or SORT_BY.SCORE`)
         }
 
     }
@@ -88,8 +88,8 @@ export class RelativeSummarizerConfig implements SummarizerConfig {
         if (this.dampingFactor < 0 || this.dampingFactor > 1) {
             throw new Error(`damping factor ${this.dampingFactor} is not valid. Must be 0 < d < 1`)
         }
-        if (this.sortMode !== Summarizer.SORT_OCCURENCE && this.sortMode !== Summarizer.SORT_SCORE) {
-            throw new Error(`sort mode ${this.sortMode} is not valid. Must be Summarizer.SORT_OCCURENCE or Summarizer.SORT_SCORE`)
+        if (this.sortMode !== SORT_BY.OCCURRENCE && this.sortMode !== SORT_BY.SCORE) {
+            throw new Error(`sort mode ${this.sortMode} is not valid. Must be SORT_BY.OCCURRENCE or SORT_BY.SCORE`)
         }
 
     }

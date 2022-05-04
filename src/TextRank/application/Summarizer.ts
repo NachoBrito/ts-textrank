@@ -1,14 +1,15 @@
 import Text from "../domain/Text"
 import Graph from "../domain/Graph"
 import Sentence from "../domain/Sentence"
-import LoggerInterface from "../infraestructure/LoggerInterface"
+import LoggerInterface from "../infrastructure/LoggerInterface"
 import { SummarizerConfig } from "./SummarizerConfig"
 
+export enum SORT_BY {
+    SCORE,
+    OCCURRENCE
+}
 
 export default class Summarizer {
-    static SORT_SCORE = 1
-    static SORT_OCCURENCE = 2
-
     private logger: LoggerInterface
     private readonly config: SummarizerConfig
     private graph: Graph | null = null
@@ -67,7 +68,7 @@ export default class Summarizer {
                 this.logger.debug("[%f] %s", s.score, s.raw)
             })
         }
-        if (this.config.getSortMode() === Summarizer.SORT_OCCURENCE) {
+        if (this.config.getSortMode() === SORT_BY.OCCURRENCE) {
             //sort winners by position
             sentences.sort((s1: Sentence, s2: Sentence) => s1.position - s2.position)
         }
