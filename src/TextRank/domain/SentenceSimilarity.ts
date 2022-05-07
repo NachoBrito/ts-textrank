@@ -1,5 +1,5 @@
-import Sentence from "./Sentence";
+import Sentence from "./Sentence"
 
 export default interface SentenceSimilarity {
-    getSimilarity(s1:Sentence, s2:Sentence):number;
+	getSimilarity(s1: Sentence, s2: Sentence): number
 }

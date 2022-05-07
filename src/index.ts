@@ -1,7 +1,7 @@
 export { default as ConsoleLogger } from "./TextRank/infrastructure/ConsoleLogger"
 export { default as LoggerInterface } from "./TextRank/infrastructure/LoggerInterface"
 export { default as NullLogger } from "./TextRank/infrastructure/NullLogger"
-export { AbsoluteSummarizerConfig,RelativeSummarizerConfig } from "./TextRank/application/SummarizerConfig"
+export { AbsoluteSummarizerConfig, RelativeSummarizerConfig } from "./TextRank/application/SummarizerConfig"
 export { default as Summarizer } from "./TextRank/application/Summarizer"
 export { default as SentenceSimilarity } from "./TextRank/domain/SentenceSimilarity"
 export { default as Word } from "./TextRank/domain/Word"
