@@ -7,7 +7,8 @@ import Text from "./Text"
 export default class DefaultTextParser implements TextParser {
 	/**
 	 *
-	 * @param sentence
+	 * @param text
+	 * @param language
 	 */
 	parse(text: string, language: string): Text {
 		const sentences: Record<string, Sentence> = {}
@@ -34,8 +35,8 @@ export default class DefaultTextParser implements TextParser {
 	/**
 	 *
 	 * @param raw
-	 * @param limiter
 	 * @param language
+	 * @param position
 	 * @returns the sentence model
 	 */
 	private buildSentence(raw: string, language: string, position: number): Sentence {

@@ -1,4 +1,4 @@
-import { transliterate as tr, slugify } from "transliteration"
+import { transliterate as tr } from "transliteration"
 
 export default class Word {
 	readonly word: string

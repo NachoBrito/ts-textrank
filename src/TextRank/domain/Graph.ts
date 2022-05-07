@@ -12,13 +12,8 @@ export default class Graph {
 		this.weightSums = this.calculateWeightSums()
 	}
 
-	/**
-	 *
-	 * @returns
-	 */
 	private calculateWeightSums(): number[] {
-		const sums = this.weights.map((values: number[]) => values.reduce((a, b) => a + b, 0))
-		return sums
+		return this.weights.map((values: number[]) => values.reduce((a, b) => a + b, 0))
 	}
 
 	/**
