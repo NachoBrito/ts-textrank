@@ -1,3 +1,5 @@
+[![Tests](https://github.com/NachoBrito/ts-textrank/actions/workflows/tests.yml/badge.svg)](https://github.com/NachoBrito/ts-textrank/actions/workflows/tests.yml)
+
 # ts-textrank
 
 ts-textrank is a Typescript implementation of the TextRank algorithm. 
