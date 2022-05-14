@@ -1,12 +1,12 @@
-import Summarizer from "../../../../src/TextRank/application/Summarizer";
-import {AbsoluteSummarizerConfig} from "../../../../src/TextRank/application/SummarizerConfig";
-import SorensenDiceSimilarity from '../../../../src/TextRank/domain/SorensenDiceSimilarity';
-import DefaultTextParser from '../../../../src/TextRank/domain/DefaultTextParser';
-import NullLogger from '../../../../src/TextRank/infraestructure/NullLogger';
+import Summarizer, { SORT_BY } from "../../../../src/TextRank/application/Summarizer"
+import { AbsoluteSummarizerConfig } from "../../../../src"
+import SorensenDiceSimilarity from "../../../../src/TextRank/domain/SorensenDiceSimilarity"
+import DefaultTextParser from "../../../../src/TextRank/domain/DefaultTextParser"
+import NullLogger from "../../../../src/TextRank/infrastructure/NullLogger"
 
 describe("Summarizer", () => {
-    it("Should summarize text", () => {
-        const txt=`La guerra ruso-ucraniana, denominado también como intervención rusa en Ucrania, es un conflicto que ha tenido varias etapas, surgido desde el año 2014. Destaca la adhesión de Crimea a Rusia en 2014 y la guerra del Donbás que comenzó ese mismo año y que aún continúa. Las manifestaciones de Euromaidán —inicio del conflicto ucraniano— comenzaron en noviembre de 2013 en Kiev debido a la suspensión de la firma del Acuerdo de Asociación entre Ucrania y la Unión Europea.
+	it("Should summarize text", () => {
+		const txt = `La guerra ruso-ucraniana, denominado también como intervención rusa en Ucrania, es un conflicto que ha tenido varias etapas, surgido desde el año 2014. Destaca la adhesión de Crimea a Rusia en 2014 y la guerra del Donbás que comenzó ese mismo año y que aún continúa. Las manifestaciones de Euromaidán —inicio del conflicto ucraniano— comenzaron en noviembre de 2013 en Kiev debido a la suspensión de la firma del Acuerdo de Asociación entre Ucrania y la Unión Europea.
 
         El 22 de febrero de 2014, tras varios meses de protestas y disturbios y tras el llamado Jueves Negro (20 de febrero) en el que murieron más de 60 manifestantes, los opositores tomaron las riendas del país y ocuparon irregularmente las principales instituciones con sede en Kiev. Seguidamente, la Rada Suprema tomó el control del país en ausencia de buena parte de sus miembros y Oleksandr Turchínov asumió la coordinación del Gobierno y la presidencia del Parlamento, cayendo así el gobierno de Víktor Yanukóvich. La Rada Suprema destituyó del cargo a Yanukóvich y tomó el control del país votando la vuelta a la Constitución de 2004, acordada el día anterior. Rusia no reconoció este gobierno como autoridad legítima de Ucrania y declaró que lo ocurrido fue un «golpe de Estado». En consecuencia, el Congreso de diputados y gobernadores regionales del Este y Sur de Ucrania hizo un llamamiento a la resistencia y acusó a la oposición de incumplir el acuerdo de paz que había sido firmado el 21 de febrero con el destituido presidente. A partir de entonces, residentes de la mitad suroriental de Ucrania se manifestaron en contra del nuevo gobierno de Kiev.
         
@@ -15,17 +15,17 @@ describe("Summarizer", () => {
         Entre tanto, la guerra del Donbás comenzó el 6 de abril de 2014. El gobierno interino de Ucrania inició un operativo armado contra los grupos armados rusos que llegaron al este de Ucrania tras la anexión de Crimea. Las tropas rusas invadieron el territorio del este de Ucrania y las tropas ucranianas lanzaron una operación antiterrorista. El principal núcleo de estos grupos, la ciudad de Slaviansk, fue sitiada por el ejército ucraniano y se enfrentaron en varios incidentes, dejando varios muertos. El conflicto se extendió a otras ciudades, como Kramatorsk y Mariúpol. Referendos independentistas de los separatistas locales fueron realizados el 11 de mayo en diversas zonas de las óblasts de Donetsk y Lugansk.
         
         El día 14 de febrero de 2015, horas antes del inicio de la nueva tregua de Minsk II, firmada unos días antes, el área de Debáltsevo estaba sufriendo importantes combates y la guerra se aproximaba nuevamente más a las alrededores de Mariúpol. Debáltsevo que progresivamente está siendo tomada bajo el control de la milicia y sus alrededores son un foco de tensión después de la entrada en vigor del acuerdo de alto el fuego. La milicia informó que el fuego de artillería ucraniana se realiza desde el interior de la caldera. El 15 de abril de 2015 los separatistas toman bajo su control el pueblo de Shirókine. El 20 de mayo de 2015, se anunció que la confederación de Nueva Rusia quedaba disuelta.`
-        
-        const sim = new SorensenDiceSimilarity()
-        const parser = new DefaultTextParser()
-        const config = new AbsoluteSummarizerConfig(2,sim,parser,.85,Summarizer.SORT_SCORE)
-        const logger = new NullLogger()
-        const summarizer = new Summarizer(config, logger)
 
-        const sentences = summarizer.summarize(txt, 'es')
+		const sim = new SorensenDiceSimilarity()
+		const parser = new DefaultTextParser()
+		const config = new AbsoluteSummarizerConfig(2, sim, parser, 0.85, SORT_BY.SCORE)
+		const logger = new NullLogger()
+		const summarizer = new Summarizer(config, logger)
 
-        //console.log(sentences)
+		const sentences = summarizer.summarize(txt, "es")
 
-        expect(sentences).toHaveLength(2)
-    })
+		//console.log(sentences)
+
+		expect(sentences).toHaveLength(2)
+	})
 })

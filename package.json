@@ -15,11 +15,13 @@
   "scripts": {
     "tsc-watch": "tsc -w",
     "tsc": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
     "test": "jest --coverage --maxWorkers=50%"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "jest": "^27.4.7",
+    "prettier": "2.6.2",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.5"
