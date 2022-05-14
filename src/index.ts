@@ -1,30 +1,13 @@
-import ConsoleLogger from "./TextRank/infraestructure/ConsoleLogger"
-import LoggerInterface from "./TextRank/infraestructure/LoggerInterface"
-import NullLogger from "./TextRank/infraestructure/NullLogger"
-import { AbsoluteSummarizerConfig,RelativeSummarizerConfig } from "./TextRank/application/SummarizerConfig"
-import Summarizer from "./TextRank/application/Summarizer"
-import SentenceSimilarity from "./TextRank/domain/SentenceSimilarity"
-import Word from "./TextRank/domain/Word"
-import DefaultTextParser from "./TextRank/domain/DefaultTextParser"
-import Text from "./TextRank/domain/Text"
-import Sentence from "./TextRank/domain/Sentence"
-import SorensenDiceSimilarity from "./TextRank/domain/SorensenDiceSimilarity"
-import TextParser from "./TextRank/domain/TextParser"
-import Graph from "./TextRank/domain/Graph"
-
-export {
-    ConsoleLogger,
-    LoggerInterface,
-    NullLogger,
-    AbsoluteSummarizerConfig,
-    RelativeSummarizerConfig,
-    Summarizer,
-    SentenceSimilarity,
-    Word,
-    DefaultTextParser,
-    Text,
-    Sentence,
-    SorensenDiceSimilarity,
-    TextParser,
-    Graph
-}
+export { default as ConsoleLogger } from "./TextRank/infrastructure/ConsoleLogger"
+export { default as LoggerInterface } from "./TextRank/infrastructure/LoggerInterface"
+export { default as NullLogger } from "./TextRank/infrastructure/NullLogger"
+export { AbsoluteSummarizerConfig, RelativeSummarizerConfig } from "./TextRank/application/SummarizerConfig"
+export { default as Summarizer } from "./TextRank/application/Summarizer"
+export { default as SentenceSimilarity } from "./TextRank/domain/SentenceSimilarity"
+export { default as Word } from "./TextRank/domain/Word"
+export { default as DefaultTextParser } from "./TextRank/domain/DefaultTextParser"
+export { default as Text } from "./TextRank/domain/Text"
+export { default as Sentence } from "./TextRank/domain/Sentence"
+export { default as SorensenDiceSimilarity } from "./TextRank/domain/SorensenDiceSimilarity"
+export { default as TextParser } from "./TextRank/domain/TextParser"
+export { default as Graph } from "./TextRank/domain/Graph"

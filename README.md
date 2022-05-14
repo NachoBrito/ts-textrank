@@ -48,9 +48,9 @@ const d = .85
 
 //How do you want summary sentences to be sorted?
 //Get sentences in the order that they appear in text:
-const sorting = Summarizer.SORT_OCCURENCE
+const sorting = SORT_BY.OCCURRENCE
 //Or sort them by relevance:
-//const sorting = Summarizer.SORT_SCORE
+//const sorting = SORT_BY.SCORE
 const config = new RelativeSummarizerConfig(ratio, sim, parser, d, sorting)
 
 //Or, if you want a fixed number of sentences:

@@ -1,12 +1,12 @@
-import Summarizer from "../../../../src/TextRank/application/Summarizer";
-import {AbsoluteSummarizerConfig} from "../../../../src/TextRank/application/SummarizerConfig";
-import SorensenDiceSimilarity from '../../../../src/TextRank/domain/SorensenDiceSimilarity';
-import DefaultTextParser from '../../../../src/TextRank/domain/DefaultTextParser';
-import NullLogger from '../../../../src/TextRank/infraestructure/NullLogger';
+import Summarizer, { SORT_BY } from "../../../../src/TextRank/application/Summarizer"
+import { AbsoluteSummarizerConfig } from "../../../../src"
+import SorensenDiceSimilarity from "../../../../src/TextRank/domain/SorensenDiceSimilarity"
+import DefaultTextParser from "../../../../src/TextRank/domain/DefaultTextParser"
+import NullLogger from "../../../../src/TextRank/infrastructure/NullLogger"
 
 describe("Summarizer", () => {
-    it("Should summarize text", () => {
-        const txt=`Por qué hay guerra
+	it("Should summarize text", () => {
+		const txt = `Por qué hay guerra
         Países apoyan Rusia
         Lotería del niño
         Área de usuario
@@ -57,17 +57,17 @@ describe("Summarizer", () => {
         Nacho Alarcón. Bruselas
         Trabaja con nosotros
         © TITANIA COMPAÑÍA EDITORIAL, S.L. 2022. España. Todos los derechos reservados Condiciones Política de Privacidad Política de Cookies Transparencia Auditado por ComScore`
-        
-        const sim = new SorensenDiceSimilarity()
-        const parser = new DefaultTextParser()
-        const config = new AbsoluteSummarizerConfig(5,sim,parser,.85,Summarizer.SORT_SCORE)
-        const logger = new NullLogger()
-        const summarizer = new Summarizer(config, logger)
 
-        const sentences = summarizer.summarize(txt, 'es')
+		const sim = new SorensenDiceSimilarity()
+		const parser = new DefaultTextParser()
+		const config = new AbsoluteSummarizerConfig(5, sim, parser, 0.85, SORT_BY.SCORE)
+		const logger = new NullLogger()
+		const summarizer = new Summarizer(config, logger)
 
-        //console.log(sentences)
+		const sentences = summarizer.summarize(txt, "es")
 
-        expect(sentences).toHaveLength(5)
-    })
+		//console.log(sentences)
+
+		expect(sentences).toHaveLength(5)
+	})
 })
